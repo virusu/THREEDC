@@ -4,8 +4,9 @@
 		<title>Threeboard</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
 	</head>
-	<body>
+	<body ng-app="ExampleApp">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r78/three.min.js"></script>
 		<script src="js/FontUtils.js"></script>
@@ -32,7 +33,34 @@
 		<script src="fonts/droid_serif_regular.typeface.js"></script>
 		<script src="fonts/droid_serif_bold.typeface.js"></script>
 		
+
+  <!-- include npm modules in proper order -->
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/elasticsearch-browser/elasticsearch.angular.min.js"></script>
 		<script src="script.js"></script>
+
+  <!-- attach the ExampleController to our main content -->
+  <div ng-controller="ExampleController" class="container">
+    <h1>Angular + Elasticsearch</h1>
+
+    <!-- if there is an error, display its message -->
+    <div ng-if="error" class="alert alert-danger" role="alert">{{error.message}}</div>
+
+    <!-- if clusterState is available, display it as formatted json -->
+    <div ng-if="clusterState" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Cluster State</h3>
+      </div>
+      <div class="panel-body">
+        <pre>{{clusterState | json}}</pre>
+      </div>
+    </div>
+  </div>
+
+
+
+	</body>
+</html>
 	</body>
 </html>
 
